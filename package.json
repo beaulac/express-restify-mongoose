@@ -51,6 +51,7 @@
   ],
   "license": "MIT",
   "main": "./src/express-restify-mongoose",
+  "types": "./index.d.ts",
   "name": "express-restify-mongoose",
   "readmeFilename": "README.md",
   "repository": {
@@ -79,7 +80,8 @@
     "CHANGELOG.md",
     "LICENSE",
     "README.md",
-    "src/"
+    "src/",
+    "index.d.ts"
   ],
   "version": "5.0.0"
 }
