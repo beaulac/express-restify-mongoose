@@ -18,6 +18,7 @@ function getDefaults() {
     restify: false,
     runValidators: false,
     allowRegex: true,
+    exactCount: false,
     private: [],
     protected: []
   })

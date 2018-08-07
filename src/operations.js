@@ -21,6 +21,10 @@ module.exports = function(model, options, excludedMap) {
     })
   }
 
+  function countForContext(context) {
+    return options.exactCount ? context.countDocuments() : context.estimatedDocumentCount()
+  }
+
   function getItems(req, res, next) {
     const contextModel = (req.erm && req.erm.model) || model
 
@@ -38,7 +42,7 @@ module.exports = function(model, options, excludedMap) {
         if (options.totalCountHeader && !req.erm.query['distinct']) {
           options.contextFilter(contextModel, req, countFilteredContext => {
             buildQuery(
-              countFilteredContext.count(),
+              countForContext(countFilteredContext),
               Object.assign(req.erm.query, {
                 skip: 0,
                 limit: 0
@@ -59,7 +63,7 @@ module.exports = function(model, options, excludedMap) {
     const contextModel = (req.erm && req.erm.model) || model
 
     options.contextFilter(contextModel, req, filteredContext => {
-      buildQuery(filteredContext.count(), req.erm.query).then(count => {
+      buildQuery(countForContext(filteredContext), req.erm.query).then(count => {
         req.erm.result = { count: count }
         req.erm.statusCode = 200
 
